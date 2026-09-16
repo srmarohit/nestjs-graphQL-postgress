@@ -20,6 +20,7 @@ export class Post {
   @Field()
   @Column()
   title: string;
+  
   @Field()
   @Column()
   content: string;

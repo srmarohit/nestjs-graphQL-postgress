@@ -5,7 +5,7 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
 export default registerAs(
   'dbconfig.dev',
   (): PostgresConnectionOptions => ({
-    url: process.env.DATABASE_URL || 'postgresql://postgress:root@localhost:5432/blogs',
+    url: process.env.DATABASE_URL,
     type: 'postgres',
 
     entities: [path.resolve(__dirname, '..') + '/**/*.entity{.ts,.js}'],
