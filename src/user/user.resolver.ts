@@ -42,22 +42,27 @@ export class UserResolver {
     return await user.profile;
   }
 
+  @Mutation(() => User)
+  createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
+    return this.userService.create(createUserInput);
+  }
+
+  // @Roles(Role.ADMIN)
+  // @UseGuards(RolesGuard)
+  // @UseGuards(GqlJwtGuard)
   // @Mutation(() => User)
-  // createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
-  //   return this.userService.create(createUserInput);
+  // updateUser(
+  //   @CurrentUser() user: JwtUser,
+  //   @Args('updateUserInput') updateUserInput: UpdateUserInput,
+  // ) {
+  //   console.log({ currentUser: user });
+
+  //   return this.userService.update(user.userId, updateUserInput);
   // }
 
-  @Roles(Role.ADMIN)
-  @UseGuards(RolesGuard)
-  @UseGuards(GqlJwtGuard)
   @Mutation(() => User)
-  updateUser(
-    @CurrentUser() user: JwtUser,
-    @Args('updateUserInput') updateUserInput: UpdateUserInput,
-  ) {
-    console.log({ currentUser: user });
-
-    return this.userService.update(user.userId, updateUserInput);
+  updateUser(@Args('id', { type: () => Int }) id: number, @Args('updateUserInput') updateUserInput: UpdateUserInput) {
+    return this.userService.update(id, updateUserInput);
   }
 
   @Mutation(() => Boolean)

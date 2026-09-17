@@ -26,7 +26,7 @@ export class Post {
   content: string;
 
   @Field(() => User)
-  @ManyToOne(() => User, (user) => user.posts)
+  @ManyToOne(() => User, (user) => user.posts, { cascade: true, onDelete: 'CASCADE' })
   user: Promise<User>;
 
   @Field(() => [Tag])
